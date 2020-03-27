@@ -31,11 +31,11 @@ public class Main {
                     for (int i = 0; i < amount; i++) {
                         sc.nextLine();
                         //String id, String name, String classID, int born, String sex
-                        System.out.println("Nhap ID: ");
+                        System.out.println("Nhap ID SV: ");
                         String nID = sc.nextLine();
                         System.out.println("Nhap Ten: ");
                         String nName = sc.nextLine();
-                        System.out.println("Nhap ma lop hoc: ");
+                        System.out.println("Nhap ma lop hoc(VD d19cn03): ");
                         String nClassID = sc.nextLine();
                         System.out.println("Nhap nam sinh: ");
                         int nBorn = sc.nextInt();
@@ -65,9 +65,10 @@ public class Main {
                         ListSubject listSubject = new ListSubject(amounts, list2);
                         //int numberofSub, ArrayList<Subject> subArrList
                         list3.add(listSubject);
-                        System.out.println("======================================");
+                        System.out.println("\n\n\n\n\n");
 
                     }
+                    System.out.println("======================================");
                     break;
 
 
@@ -93,15 +94,10 @@ public class Main {
                         list1.add(teacherInfor);
 
                     }
+                    System.out.println("=============================================");
                     break;
 
                 case 3://Show infor SV
-                    if (list.isEmpty()) System.out.println("an phim 1 de add SV: ");
-                    else {
-                        for (StudentInfor studentInfor : list) {
-                            System.out.println(studentInfor);
-                        }
-                    }
                     int totalNumPart = 0;
                     float sum = 0;
                     for (int i = 0; i < list.size(); i++) {
@@ -110,9 +106,19 @@ public class Main {
                                     * list3.get(i).subArrList.get(j).getNumPeriod();
                             totalNumPart = (int) (totalNumPart + list3.get(i).subArrList.
                                     get(j).getNumPeriod());
+                        }System.out.println("GPA: " + (sum / totalNumPart));
+                        System.out.println("\n\n");
+                    }
+                    if (list.isEmpty()) System.out.println("an phim 1 de add SV: ");
+                    else {
+                        for (StudentInfor studentInfor : list) {
+                            System.out.println(studentInfor);
+                            System.out.println("GPA: " + (sum / totalNumPart));
+                            System.out.println("\n\n");
                         }
                     }
-                    System.out.println("GPA: " + (sum / totalNumPart));
+
+
                     System.out.println("=============");
 
                     break;
@@ -125,6 +131,7 @@ public class Main {
                             System.out.println(teacherInfor);
                         }
                     }
+                    System.out.println("==========================================");
                     break;
                 case 5://hien thi theo lop
                     if (list.isEmpty() && list1.isEmpty()) {
@@ -133,22 +140,23 @@ public class Main {
                         break;
                     } else {
                         sc.nextLine();
-                        System.out.println("Nhap vao ma lop hoc(VD: CN03)");
+                        System.out.println("Nhap vao ma lop hoc(VD: D19CN03)");
                         String newInput = sc.nextLine();
                         for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).getClassID().equals(newInput.toUpperCase())) {
-                                System.out.println("Hoc sinh: ");
+                                System.out.print("Hoc sinh: ");
                                 System.out.println(list.get(i).getName());
                             }
                         }
 
                         for (int j = 0; j < list1.size(); j++) {
                             if (list1.get(j).getClassID1().equals(newInput.toUpperCase())) {
-                                System.out.println("Giao vien: ");
+                                System.out.print("Giao vien: ");
                                 System.out.println(list1.get(j).getName1());
                             }
                         }
                     }
+                    System.out.println("============================================");
                     break;
                 case 6: // sua infor SV
                     if (list.isEmpty()) {
@@ -169,10 +177,12 @@ public class Main {
                                 list.get(i).setSex(sc.nextLine());
                                 System.out.println("New Born: ");
                                 list.get(i).setBorn(sc.nextInt());
+                                System.out.println("Done!");
 
-                            } else System.out.println("check lai ma SV");
+                            }
                         }
                     }
+                    System.out.println("================================================");
                     break;
                 case 7://sua infor GV
                     if (list1.isEmpty()) {
@@ -195,27 +205,29 @@ public class Main {
                                 list1.get(i).setBorn1(sc.nextInt());
                                 System.out.println("Done! ");
 
-                            } else System.out.println("check lai ma GV");
+                            }
                         }
                     }
-
+                    System.out.println("==============================================");
                     break;
                 case 8: // sua diem theo ma hoc phan;
                     sc.nextLine();
                     System.out.println("Ma SV can sua diem: ");
                     String input1=sc.nextLine();
                     for (int i=0; i< list.size(); i++){
-                        if (list.get(i).getId().equals(input1.toUpperCase())){
+                        if (list.get(i).getId().equals(input1)){
                             System.out.println("Nhap ma mon hoc can sua: ");
-                            String input2=sc.nextLine();
+                            String nhapppppp=sc.nextLine();
                             for (int j=0; j< list3.get(i).getNumberofSub(); j++){
-                                if(list3.get(i).subArrList.get(j).getIdSub().equals(input2)){
+                                System.out.println("hmmmm");
+                                if((list3.get(i).subArrList.get(j).getIdSub()).equals(nhapppppp)){
                                     System.out.println("Nhap so diem muon sua: ");
                                     list3.get(i).subArrList.get(j).setScoreSub(sc.nextFloat());
                                 }
                             }
-                        } else System.out.println("Check lai: ");
+                        }
                     }
+                    System.out.println("==========================================");
                     break;
                 case 9:   // xoa SV theo ma SV
                 sc.nextLine();
@@ -227,8 +239,10 @@ public class Main {
                         System.out.println("Done! ");
                     }
                 }
+                    System.out.println("==========================================");
                 break;
-
+                case 10:
+                    System.out.println("tính năng 10+n đang trong giai đoạn phát triển");
 
 
             }
