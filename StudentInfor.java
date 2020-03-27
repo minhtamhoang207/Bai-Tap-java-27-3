@@ -1,20 +1,15 @@
 class StudentInfor {
-    private String id, lastName, firstName, classID, sex, infor ;
+    private String id, name, classID, sex;
     private int born;
     public StudentInfor(){
 
     }
-    public StudentInfor(String id, String lastName, String firstName, String classID, String sex, String infor, int born) {
+    public StudentInfor(String id, String name, String classID, int born, String sex) {
         this.id = id;
-        this.lastName = lastName;
-        this.firstName = firstName;
+        this.name = name;
         this.classID = classID;
         this.sex = sex;
-        this.infor = infor;
         this.born = born;
-    }
-
-    public StudentInfor(String studentCode, String name, String name1, String classCode, String gender, String yearOfBirth) {
     }
 
     public String getId() {
@@ -25,24 +20,16 @@ class StudentInfor {
         this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getClassID() {
-        return classID;
+        return classID.toUpperCase();
     }
 
     public void setClassID(String classID) {
@@ -57,7 +44,6 @@ class StudentInfor {
         this.sex = sex;
     }
 
-
     public int getBorn() {
         return born;
     }
@@ -66,4 +52,9 @@ class StudentInfor {
         this.born = born;
     }
 
+    @Override
+    public String toString() {
+        return "ID: " + id + "\nname: " + name + "\nclassID: " + classID.toUpperCase() +"\nsex: " + sex + "\nborn: " + born;
+    }
 }
+

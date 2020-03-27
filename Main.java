@@ -1,225 +1,239 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main {
-
     public static void main(String[] args) {
-        ArrayList<StudentInfor> studentsList = new ArrayList<>();
-        ArrayList<TeacherInfor> teachersList = new ArrayList<>() ;
-        ArrayList<ListSubject> listSubArrList=new ArrayList<>() ;
+        ArrayList<StudentInfor> list = new ArrayList<>();//list SV
+        ArrayList<TeacherInfor> list1 = new ArrayList<>();//list GV
+        ArrayList<Subject> list2 = new ArrayList<>();//subjectInfor
+        ArrayList<ListSubject> list3 = new ArrayList<>(); // list Subject
         Scanner sc = new Scanner(System.in);
-        int choice = 1;
-        System.out.println("Lua chon chuc nang: ");
-        System.out.println("1. Hien thi danh sach sinh vien kem thong tin");
-        System.out.println("2. Hien thi danh sach giao vien kem thong tin");
-        System.out.println("3. Hien thi danh sach lop hoc");
-        System.out.println("4. Them sinh vien");
-        System.out.println("5. Them giao vien");
-        System.out.println("6. Sua thong tin sinh vien hoac giao vien");
-        System.out.println("7. Xoa sinh vien");
-        System.out.println("8. Sua diem hoc phan");
-        System.out.println("0. Thoat chuong trinh");
-        while (choice >= 0) {
-            System.out.println("Ban chon chuc nang nao ?");
-            choice = sc.nextInt();
-            switch (choice) {
+        System.out.println("______________________MENU____________________"+
+                "\n1.Nhap vao thong tin SV"+
+                "\n2.Nhap vao thong tin GV"+
+                "\n3.Hien thi thong tin SV"+
+                "\n4.Hien thi thong tin GV"+
+                "\n5.Hien thi theo lop"+
+                "\n6.Sua thong tin SV"+
+                "\n7.Sua thong tin GV"+
+                "\n8.Sua diem theo ma SV"+
+                "\n9.Xoa thong tin SV"+
+                "\n0.Ket thuc chuong trinh");
+        int loop = 1;
+        do {
+            int key = sc.nextInt();
+            switch (key) {
                 case 0:
-                    choice = -1;
-                    break;
-                case 1:
-                    if (studentsList.size() == 0)
-                        System.out.println("Hay them sinh vien vao danh sach");
-                    else {
-                        for (int i = 0; i < studentsList.size(); i++) {
-                            System.out.println("Ho ten: " + studentsList.get(i).getFirstName()+ studentsList.get(i).getLastName());
-                            System.out.println("Nam sinh: " + studentsList.get(i).getBorn());
-                            System.out.println("Gioi tinh " + studentsList.get(i).getSex());
-                            System.out.println("Ma sinh vien: " + studentsList.get(i).getId());
-                            System.out.println("Ma lop: " + studentsList.get(i).getClassID());
-                            int totalNumPart=0 ;
-                            float sum=0 ;
-                            for(int j=0 ; j<listSubArrList.get(i).getNumberofSub() ; j++){
-                                sum=sum+listSubArrList.get(i).subArrList.get(j).getScoreSub()
-                                        *listSubArrList.get(i).subArrList.get(j).getNumPeriod() ;
-                                totalNumPart= (int) (totalNumPart+listSubArrList.get(i).subArrList.
-                                                                        get(j).getNumPeriod());
-                            }
-                            System.out.println("Diem trung binh tich luy: "+(sum/totalNumPart));
-                            System.out.println("--------");
-                        }
-                    }
-                    break;
-                case 2:
-                    if (teachersList.size() == 0)
-                        System.out.println("Hay them giao vien vao danh sach");
-                    else {
-                        for (int i = 0; i < teachersList.size(); i++) {
-                            System.out.println("Ho ten: " + teachersList.get(i).getFirstName1() + teachersList.get(i).getLastName1());
-                            System.out.println("Nam sinh: " + teachersList.get(i).getBorn1());
-                            System.out.println("Gioi tinh " + teachersList.get(i).getSex1());
-                            System.out.println("Ma giao vien : " + teachersList.get(i).getId1());
-                            System.out.println("Ma lop: " + teachersList.get(i).getClassID1());
-                            System.out.println("--------");
-                        }
-                    }
-                    break;
-                case 3:
-                    if(teachersList.size()==0 || studentsList.size()==0)
-                        System.out.println("Danh sach giao vien va sinh vien khong duoc bo trong");
-                    else {
-                        sc.nextLine() ;
-                        System.out.println("Nhap ma lop hoc can tim(D**CQCN**):");
-                        String classID=sc.nextLine() ;
-                        for(int i=0 ; i<teachersList.size() ; i++){
-                            if(teachersList.get(i).getClassID1().equals(classID)){
-                                System.out.println("Giao Vien: "+teachersList.get(i).getLastName1()+teachersList.get(i).getFirstName1());
-                            }
-                        }
-                        System.out.println("Danh sach sinh vien: ");
-                        for(int j=0 ; j<studentsList.size() ; j++){
-                            if(studentsList.get(j).getClassID().equals(classID)){
-                                System.out.println(studentsList.get(j).getFirstName());
-                            }
-                        }
-                    }
-                    break;
-                case 4:
-                    System.out.println("Nhap so luong sinh vien can them: ");
-                    int numberOfStudent=sc.nextInt() ;
-                    for(int i=0 ; i<numberOfStudent ; i++){
-                        sc.nextLine() ;
-                        System.out.println("Nhap ten: ");
-                        String name=sc.nextLine() ;
+                    System.exit(0);
+                case 1://nhap thong tin SV +diem
+                    System.out.println("Nhap so sinh vien can add: ");
+                    int amount = sc.nextInt();
+                    for (int i = 0; i < amount; i++) {
+                        sc.nextLine();
+                        //String id, String name, String classID, int born, String sex
+                        System.out.println("Nhap ID: ");
+                        String nID = sc.nextLine();
+                        System.out.println("Nhap Ten: ");
+                        String nName = sc.nextLine();
+                        System.out.println("Nhap ma lop hoc: ");
+                        String nClassID = sc.nextLine();
                         System.out.println("Nhap nam sinh: ");
-                        String yearOfBirth=sc.nextLine() ;
+                        int nBorn = sc.nextInt();
+                        sc.nextLine();
                         System.out.println("Nhap gioi tinh: ");
-                        String gender=sc.nextLine() ;
-                        System.out.println("Nhap ma sinh vien: ");
-                        String studentCode=sc.nextLine() ;
-                        System.out.println("Nhap ma lop: ");
-                        String classCode=sc.nextLine() ;
-                        ArrayList<Subject> subjectsList = new ArrayList<>() ;
-                        System.out.println("Nhap so hoc phan da hoc: ");
-                        int numberOfSubject = sc.nextInt() ;
-                        sc.nextLine() ;
-                        for(int j=0 ; j<numberOfSubject ; j++){
-                            System.out.println("Nhap ten hoc phan: ");
-                            String nameSubject=sc.nextLine() ;
-                            System.out.println("Nhap ma hoc phan: ");
-                            String idSubject=sc.nextLine() ;
+                        String nSex = sc.nextLine();
+                        StudentInfor studentInfor = new StudentInfor(nID, nName, nClassID, nBorn, nSex);
+                        list.add(studentInfor);
+                        System.out.println("So hoc phan da hoc: ");
+                        int amounts = sc.nextInt();
+                        for (int j = 0; j < amounts; j++) {
+                            //String idSub, String nameSub, float numPeriod, float scoreSub
+                            System.out.println("ID mon hoc: ");
+                            String nIDSub = sc.nextLine();
+                            sc.nextLine();
+                            System.out.println("Ten mon hoc: ");
+                            String nNameSub = sc.nextLine();
                             System.out.println("So tin chi: ");
-                            int numberOfPart=sc.nextInt() ;
-                            System.out.println("Diem: ");
-                            float score=sc.nextFloat() ;
-                            sc.nextLine() ;
-                            Subject subject=new Subject(idSubject,nameSubject,numberOfPart,score) ;
-                            subjectsList.add(subject) ;
+                            float nNumPeriod = sc.nextFloat();
+                            System.out.println("Diem ket thuc hoc phan (he 4):");
+                            float nScoreSub = sc.nextFloat();
+                            Subject subject = new Subject(nIDSub, nNameSub, nNumPeriod, nScoreSub);
+                            list2.add(subject);
+
+
                         }
-                        ListSubject listSubject = new ListSubject(studentCode, numberOfSubject, subjectsList) ;
-                        listSubArrList.add(listSubject) ;
-                        StudentInfor student=new StudentInfor(studentCode,name,name,classCode,gender,yearOfBirth) ;
-                        //String id, String lastName, String firstName, String classID, String sex, String infor, int born
-                        studentsList.add(student) ;
-                        System.out.println("----");
+                        ListSubject listSubject = new ListSubject(amounts, list2);
+                        //int numberofSub, ArrayList<Subject> subArrList
+                        list3.add(listSubject);
+                        System.out.println("======================================");
+
                     }
                     break;
-                case 5:
-                    System.out.println("Nhap so luong giao vien can them: ");
-                    int numberOfTeacher=sc.nextInt() ;
-                    for(int i=0 ; i<numberOfTeacher ; i++){
-                        sc.nextLine() ;
-                        System.out.println("Nhap ten: ");
-                        String name=sc.nextLine() ;
+
+
+                case 2://nhap thong tin giao vien
+                    System.out.println("Nhap so giao vien can add: ");
+                    //String id1, String classID1, String name1, int born, String sex1
+                    int amountT = sc.nextInt();
+                    for (int i = 0; i < amountT; i++) {
+                        sc.nextLine();
+                        System.out.println("Nhap ID: ");
+                        String nID1 = sc.nextLine();
+                        System.out.println("Nhap Ten: ");
+                        String nName1 = sc.nextLine();
+                        System.out.println("Nhap ma lop hoc: (VD:D19CN03) ");
+                        String nClassID1 = sc.nextLine();
                         System.out.println("Nhap nam sinh: ");
-                        String yearOfBirth=sc.nextLine() ;
+                        int nBorn1 = sc.nextInt();
+                        sc.nextLine();
                         System.out.println("Nhap gioi tinh: ");
-                        String gender=sc.nextLine() ;
-                        System.out.println("Nhap ma giao vien: ");
-                        String studentCode=sc.nextLine() ;
-                        System.out.println("Nhap ma lop: ");
-                        String classCode=sc.nextLine() ;
-                        TeacherInfor teacher=new TeacherInfor(name,yearOfBirth,gender,studentCode,classCode) ;
-                        teachersList.add(teacher) ;
-                        System.out.println("----");
+                        String nSex1 = sc.nextLine();
+                        TeacherInfor teacherInfor = new TeacherInfor(nID1, nName1, nClassID1, nBorn1, nSex1);
+                        //String id, String name, String classID, int born, String sex
+                        list1.add(teacherInfor);
+
                     }
                     break;
-                case 6:
-                    sc.nextLine() ;
-                    System.out.println("Nhap ma sinh vien hoac giao vien can sua: ");
-                    String pesonalCode=sc.nextLine() ;
-                    int tmp=0 ;
-                    for(int i=0 ; i<teachersList.size() ; i++){
-                        if(pesonalCode.equals(teachersList.get(i).getId1())){
-                            System.out.println("Ten moi: ");
-                            teachersList.get(i).setFirstName1(sc.nextLine());
-                            System.out.println("Nam sinh: ");
-                            teachersList.get(i).setBorn1(sc.nextInt());
-                            System.out.println("Gioi tinh: ");
-                            teachersList.get(i).setSex1(sc.nextLine());
-                            System.out.println("Ma giao vien: ");
-                            teachersList.get(i).setId1(sc.nextLine());
-                            System.out.println("Ma lop: ");
-                            teachersList.get(i).setClassID1(sc.nextLine());
-                            tmp=1 ;
-                            break;
+
+                case 3://Show infor SV
+                    if (list.isEmpty()) System.out.println("an phim 1 de add SV: ");
+                    else {
+                        for (StudentInfor studentInfor : list) {
+                            System.out.println(studentInfor);
                         }
                     }
-                    if(tmp==0){
-                        for(int j=0 ; j<studentsList.size() ; j++){
-                            if(pesonalCode.equals(studentsList.get(j).getId())){
-                                System.out.println("Ten 4am sinh: ");
-                                studentsList.get(j).setBorn(sc.nextInt());
-                                System.out.println("Gioi tinh: ");
-                                studentsList.get(j).setSex(sc.nextLine());
-                                System.out.println("Ma sinh vien: ");
-                                studentsList.get(j).setId(sc.nextLine());
-                                System.out.println("Ma lop: ");
-                                studentsList.get(j).setClassID(sc.nextLine());
-                                tmp=1 ;
-                                break;
+                    int totalNumPart = 0;
+                    float sum = 0;
+                    for (int i = 0; i < list.size(); i++) {
+                        for (int j = 0; j < list3.get(i).getNumberofSub(); j++) {
+                            sum = sum + list3.get(i).subArrList.get(j).getScoreSub()
+                                    * list3.get(i).subArrList.get(j).getNumPeriod();
+                            totalNumPart = (int) (totalNumPart + list3.get(i).subArrList.
+                                    get(j).getNumPeriod());
+                        }
+                    }
+                    System.out.println("GPA: " + (sum / totalNumPart));
+                    System.out.println("=============");
+
+                    break;
+
+                case 4://show infor GV
+                    System.out.println("Giang vien dayy: \n");
+                    if (list1.isEmpty()) System.out.println("an phim 1 de add giang vien: ");
+                    else {
+                        for (TeacherInfor teacherInfor : list1) {
+                            System.out.println(teacherInfor);
+                        }
+                    }
+                    break;
+                case 5://hien thi theo lop
+                    if (list.isEmpty() && list1.isEmpty()) {
+                        System.out.println("nhan 1 hoac 2 de add: ");
+                        System.out.println("====================================");
+                        break;
+                    } else {
+                        sc.nextLine();
+                        System.out.println("Nhap vao ma lop hoc(VD: CN03)");
+                        String newInput = sc.nextLine();
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i).getClassID().equals(newInput.toUpperCase())) {
+                                System.out.println("Hoc sinh: ");
+                                System.out.println(list.get(i).getName());
+                            }
+                        }
+
+                        for (int j = 0; j < list1.size(); j++) {
+                            if (list1.get(j).getClassID1().equals(newInput.toUpperCase())) {
+                                System.out.println("Giao vien: ");
+                                System.out.println(list1.get(j).getName1());
                             }
                         }
                     }
-                    if(tmp==0)
-                        System.out.println("Khong tim thay sinh vien hoac giao vien nay");
                     break;
-                case 7:
-                    sc.nextLine() ;
-                    System.out.println("Nhap ma cua sinh vien can xoa: ");
-                    String personalCode=sc.nextLine() ;
-                    for (int i=0 ; i<studentsList.size() ; i++){
-                        if(personalCode.equals(studentsList.get(i).getId()))
-                            studentsList.remove(i) ;
+                case 6: // sua infor SV
+                    if (list.isEmpty()) {
+                        System.out.println("nhan 1 de add: ");
+                        System.out.println("====================================");
+                        break;
+                    } else {
+                        sc.nextLine();
+                        System.out.println("Nhap vao ma sinh vien (VD: b19cn567)");
+                        String Input = sc.nextLine();
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i).getId().equals(Input.toUpperCase())) {
+                                System.out.println("New name: ");
+                                list.get(i).setName(sc.nextLine());
+                                System.out.println("New ClassID: ");
+                                list.get(i).setClassID(sc.nextLine());
+                                System.out.println("New Sex: ");
+                                list.get(i).setSex(sc.nextLine());
+                                System.out.println("New Born: ");
+                                list.get(i).setBorn(sc.nextInt());
+
+                            } else System.out.println("check lai ma SV");
+                        }
                     }
                     break;
-                case 8:
-                    sc.nextLine() ;
-                    System.out.println("Nhap ma sinh vien can sua diem: ");
-                    String idStudent=sc.nextLine() ;
-                    int tmpCase8=0 ;
-                    for(int i=0 ;i<studentsList.size() ; i++ ){
-                        if(studentsList.get(i).getId().equals(idStudent)){
-                            System.out.println("Nhap ma hoc phan can sua(khong sua nua thi nhap 0): ");
-                            String idSub=sc.nextLine() ;
-                            if(idSub.equals("0"))
-                                break;
-                            for(int j=0 ; j<listSubArrList.get(i).getNumberofSub() ; j++){
-                                if(idSub.equals(listSubArrList.get(i).subArrList
-                                        .get(j).getIdSub())){
-                                    System.out.println("Nhap diem moi: ");
-                                    listSubArrList.get(i).subArrList
-                                            .get(j).setScoreSub(sc.nextFloat());
-                                    tmpCase8=1 ;
-                                    break;
+                case 7://sua infor GV
+                    if (list1.isEmpty()) {
+                        System.out.println("nhan 2 de add: ");
+                        System.out.println("====================================");
+                        break;
+                    } else {
+                        sc.nextLine();
+                        System.out.println("Nhap vao ma GV (VD: b19cn567)");
+                        String Input = sc.nextLine();
+                        for (int i = 0; i < list1.size(); i++) {
+                            if (list1.get(i).getId1().equals(Input.toUpperCase())) {
+                                System.out.println("New name: ");
+                                list1.get(i).setName1(sc.nextLine());
+                                System.out.println("New ClassID: ");
+                                list1.get(i).setClassID1(sc.nextLine());
+                                System.out.println("New Sex: ");
+                                list1.get(i).setSex1(sc.nextLine());
+                                System.out.println("New Born: ");
+                                list1.get(i).setBorn1(sc.nextInt());
+                                System.out.println("Done! ");
+
+                            } else System.out.println("check lai ma GV");
+                        }
+                    }
+
+                    break;
+                case 8: // sua diem theo ma hoc phan;
+                    sc.nextLine();
+                    System.out.println("Ma SV can sua diem: ");
+                    String input1=sc.nextLine();
+                    for (int i=0; i< list.size(); i++){
+                        if (list.get(i).getId().equals(input1.toUpperCase())){
+                            System.out.println("Nhap ma mon hoc can sua: ");
+                            String input2=sc.nextLine();
+                            for (int j=0; j< list3.get(i).getNumberofSub(); j++){
+                                if(list3.get(i).subArrList.get(j).getIdSub().equals(input2)){
+                                    System.out.println("Nhap so diem muon sua: ");
+                                    list3.get(i).subArrList.get(j).setScoreSub(sc.nextFloat());
                                 }
                             }
-                        }
-                        if(tmpCase8==0)
-                            System.out.println("Khong tim thay sinh vien nay");
+                        } else System.out.println("Check lai: ");
                     }
                     break;
-                default:
+                case 9:   // xoa SV theo ma SV
+                sc.nextLine();
+                    System.out.println(" Nhap ma SV muon xoa data: ");
+                String input2=sc.nextLine();
+                for (int i=0; i<list1.size(); i++){
+                    if (list.get(i).getId().equals(input2)){
+                        list.remove(i);
+                        System.out.println("Done! ");
+                    }
+                }
+                break;
+
+
+
             }
+
         }
+        while (loop == 1);
     }
 }

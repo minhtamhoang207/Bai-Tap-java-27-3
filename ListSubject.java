@@ -12,9 +12,6 @@ public class ListSubject {
         this.subArrList = subArrList;
     }
 
-    public ListSubject(String studentCode, int numberOfSubject, ArrayList<Subject> subjectsList) {
-    }
-
     public int getNumberofSub() {
         return numberofSub;
     }
